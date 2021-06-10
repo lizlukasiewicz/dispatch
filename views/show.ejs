@@ -1,7 +1,18 @@
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.css" type="text/css">
 
 <h4>Select your Zones::</h4>
-<button type="button" id="newZone" name="newZone">Start a New Zone</button>
+<pre id="info"></pre>
+<div>
+    <h4>Add a label to selected zone::</h4>
+<form method="GET" action="/zone">
+<input type="text" name ="zone" placeholder="Label zone"/>
+<input type="submit" />
+</form>
+</div>
+
 <div id="map"></div>
+
 
  <script>
      mapboxgl.accessToken = '<%= mapkey %>'
@@ -11,20 +22,47 @@
          center: [-73.93126065039185, 40.74089181704446],
          zoom: 10
      })
-     map.on('click', function(e) {
-		    var coordinates = e.lngLat;
+    //  map.on('click', function(e) {
+	// 	    var coordinates = e.lngLat;
 
-		    new mapboxgl.Popup()
-		      .setLngLat(coordinates)
-		      .setHTML('you clicked here: <br/>' + coordinates)
-		      .addTo(map);
-		  });
+	// 	    new mapboxgl.Popup()
+	// 	      .setLngLat(coordinates)
+	// 	      .setHTML('you clicked here: <br/>' + coordinates)
+	// 	      .addTo(map);
+	// 	  });
+          
+var draw = new MapboxDraw({
+    displayControlsDefault: false,
+    controls: {
+        polygon: true,
+        trash: true
+    },
+    defaultMode: 'draw_polygon'
+});
+map.addControl(draw);
+ 
+map.on('draw.create', updateArea);
+map.on('draw.delete', updateArea);
+map.on('draw.update', updateArea);
 
+function updateArea(e) {
+    console.log(e) // the click event
+    console.log(e.lngLat)
+}
+map.on('click', function (e) {
+    document.getElementById('info').innerHTML =
+// e.point is the x, y coordinates of the mousemove event relative
+// to the top-left corner of the map
+    // JSON.stringify(e.point) +
+    // '<br />' +
+// e.lngLat is the longitude, latitude geographical position of the event
+    JSON.stringify(e.lngLat.wrap())
+});
 
 //for each 'click, push.coordinates --> to array.push[]  
 //run function spread operator - (new way to do push function) -- to check if entire length of array(add new position)loop through array-- look into:caching array values - adding data to second object- before loop check if value is already in array
 // function push first/check points with loop 
-//Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon
+
 // class Zone {
 //     constructor()
 // }
@@ -38,69 +76,38 @@
 //             }
 //         }
 //     }
-function setCoordinates(e) {
-    var coordinates = e.lngLat
+// function setCoordinates(e) {
+//     var coordinates = e.lngLat
 
-}
-const newZone = document.getElementById("newZone")
-newZone.on('click', function (e) { 
-map.addSource('new york city', {
-    'type': 'geojson',
-    'data': {
-        'type': 'Feature',
-        'geometry': {
-            'type': 'Polygon',
-            // These coordinates outline Maine.
-            'coordinates': [
-                [  [] 
-                    // [-67.13734, 45.13745],
-                    // [-66.96466, 44.8097],
-                    // [-68.03252, 44.3252],
-                    // [-69.06, 43.98],
-                    // [-70.11617, 43.68405],
-                    // [-70.64573, 43.09008],
-                    // [-70.75102, 43.08003],
-                    // [-70.79761, 43.21973],
-                    // [-70.98176, 43.36789],
-                    // [-70.94416, 43.46633],
-                    // [-71.08482, 45.30524],
+// }
+// const newZone = document.getElementById("newZone")
+// newZone.on('click', function (e) { 
+// map.addSource('new york city', {
+//     'type': 'geojson',
+//     'data': {
+//         'type': 'Feature',
+//         'geometry': {
+//             'type': 'Polygon',
+//             // These coordinates outline Maine.
+//             'coordinates': [
+//                 [  [] 
+//                     // [-67.13734, 45.13745],
+//                     // [-66.96466, 44.8097],
+//                     // [-68.03252, 44.3252],
+//                     // [-69.06, 43.98],
+//                     // [-70.11617, 43.68405],
+//                     // [-70.64573, 43.09008],
+//                     // [-70.75102, 43.08003],
+//                     // [-70.79761, 43.21973],
+//                     // [-70.98176, 43.36789],
+//                     // [-70.94416, 43.46633],
+//                     // [-71.08482, 45.30524],
 
-                ]
-            ]
-        }
-    }
-});
-})
-// Add a new layer to visualize the polygon.
-map.addLayer({
-    'id': 'new york city',
-    'type': 'fill',
-    'source': 'maine', // reference the data source
-    'layout': {},
-    'paint': {
-    'fill-color': '#0080ff', // blue color fill
-    'fill-opacity': 0.5
-    }
-});
-// Add a black outline around the polygon.
-map.addLayer({
-'id': 'outline',
-'type': 'line',
-'source': 'new york city',
-'layout': {},
-'paint': {
-'line-color': '#000',
-'line-width': 3
-}
-});
+//                 ]
+//             ]
+//         }
+//     }
+// });
+// })
 
-    //  geojson.features.forEach(marker => {
-    //      const el = document.createElement('img')
-    //      el.class = 'marker'
-    //      el.src = 'images/mapbox-icon.png'
-    //      el.style.width = '3vw'
-    //      new mapboxgl.Marker(el)
-    //      .setLngLat(marker.geometry.coordinates)
-    //      .addTo(map)
-    //  })
  </script>

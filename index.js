@@ -31,14 +31,19 @@ app.get('/search', (req, res) => {
     })
     .send()
     .then(response => {
-        console.log(response.body.features[0])
+        //console.log(response.body.features[0])
         res.render('show.ejs', {
             match: response.body.features[0],
             mapkey: process.env.MAPBOX_TOKEN
         })
     })
 })
-//GET polygon lat/lon coordinates 
+//GET polygon lat/lon coordinates
+
+//POST - longitude latitude coordinates 
+
+//PUT (UPDATE) longitude/latitude coordinates 
+
 app.listen(PORT, () => console.log(chalk.bold.rgb(10,100,200)`smooth sounds of port ${PORT}🗺`))
 
 // console.log(chalk`{bold.rgb(10,100,200) Hello!}`)

@@ -10,3 +10,16 @@
     width: 70%;
     height: 80%;
 }
+
+#info {
+    display: block;
+    position: relative;
+    width: 50%;
+    height: 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    text-align: center;
+    color: #222;
+    background: #fff;
+    }
