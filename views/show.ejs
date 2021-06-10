@@ -1,0 +1,36 @@
+
+<h4>Select your zones</h4>
+
+<div id="map"></div>
+
+ <script>
+     mapboxgl.accessToken = '<%= mapkey %>'
+     const map = new mapboxgl.Map({
+         container: 'map',
+         style: 'mapbox://styles/mapbox/streets-v11',
+         center: [-73.93126065039185, 40.74089181704446],
+         zoom: 10
+     })
+     map.on('click', function(e) {
+		    var coordinates = e.lngLat;
+
+		    new mapboxgl.Popup()
+		      .setLngLat(coordinates)
+		      .setHTML('you clicked here: <br/>' + coordinates)
+		      .addTo(map);
+		  });
+
+
+
+//Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon
+
+    //  geojson.features.forEach(marker => {
+    //      const el = document.createElement('img')
+    //      el.class = 'marker'
+    //      el.src = 'images/mapbox-icon.png'
+    //      el.style.width = '3vw'
+    //      new mapboxgl.Marker(el)
+    //      .setLngLat(marker.geometry.coordinates)
+    //      .addTo(map)
+    //  })
+ </script>

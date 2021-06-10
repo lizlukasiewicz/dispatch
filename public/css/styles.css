@@ -1,0 +1,12 @@
+* {
+    background-color: teal;
+}
+
+#map {
+    position: absolute;
+    /* bottom: 0;
+    top: 35%;
+    left: 50%; */
+    width: 70%;
+    height: 80%;
+}
