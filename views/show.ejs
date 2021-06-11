@@ -5,8 +5,8 @@
 <pre id="info"></pre>
 <div>
     <h4>Add a label to selected zone::</h4>
-<form method="GET" action="/zone">
-<input type="text" name ="zone" placeholder="Label zone"/>
+<form method="GET" action="/label">
+<input type="text" name ="label" placeholder="Label zone"/>
 <input type="submit" />
 </form>
 </div>
@@ -46,9 +46,20 @@ map.on('draw.delete', updateArea);
 map.on('draw.update', updateArea);
 
 function updateArea(e) {
-    console.log(e) // the click event
-    console.log(e.lngLat)
+    const headers = new Headers({
+  'Content-Type': 'application/json',
+  'lngLat': e.features[0].geometry.coordinates[0]
+})
+        fetch('/zone', {
+            method: 'GET',
+            headers: headers,
+        }).then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+   console.log(e) //the click event
+   console.log(e.features[0].geometry.coordinates[0])
 }
+
 map.on('click', function (e) {
     document.getElementById('info').innerHTML =
 // e.point is the x, y coordinates of the mousemove event relative
@@ -78,36 +89,8 @@ map.on('click', function (e) {
 //     }
 // function setCoordinates(e) {
 //     var coordinates = e.lngLat
-
 // }
 // const newZone = document.getElementById("newZone")
-// newZone.on('click', function (e) { 
-// map.addSource('new york city', {
-//     'type': 'geojson',
-//     'data': {
-//         'type': 'Feature',
-//         'geometry': {
-//             'type': 'Polygon',
-//             // These coordinates outline Maine.
-//             'coordinates': [
-//                 [  [] 
-//                     // [-67.13734, 45.13745],
-//                     // [-66.96466, 44.8097],
-//                     // [-68.03252, 44.3252],
-//                     // [-69.06, 43.98],
-//                     // [-70.11617, 43.68405],
-//                     // [-70.64573, 43.09008],
-//                     // [-70.75102, 43.08003],
-//                     // [-70.79761, 43.21973],
-//                     // [-70.98176, 43.36789],
-//                     // [-70.94416, 43.46633],
-//                     // [-71.08482, 45.30524],
 
-//                 ]
-//             ]
-//         }
-//     }
-// });
-// })
 
  </script>

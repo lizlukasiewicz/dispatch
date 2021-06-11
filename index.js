@@ -4,6 +4,7 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
 const geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN })
 const layouts =require('express-ejs-layouts')
 const chalk = require('chalk')
+const { parse } = require('dotenv')
 
 //CONFIG APP
 const app = express()
@@ -20,6 +21,7 @@ app.use(express.static(__dirname + `/public`))
 app.get('/', (req, res) => {
     res.render('home.ejs')
 })
+
 
 //GET customer input from home.ejs (req.query.name req.query.phone req.query.address)
 //save it to database
@@ -38,11 +40,21 @@ app.get('/search', (req, res) => {
         })
     })
 })
-//GET polygon lat/lon coordinates
+//GET polygon lat/lon coordinates array, and id #
+app.get('/zone', (req, res) => {
+    const lnglat = req.headers.lnglat.split(",").map(num => parseFloat(num))
+    console.log(lnglat)
+    res.json({message: 'hello from the route'})
+})
+// app.get('show.ejs', (req, res) => {
+// })
+    //get zone name
+    //store zone data in model table
 
-//POST - longitude latitude coordinates 
+//POST - zone data with input name 
 
 //PUT (UPDATE) longitude/latitude coordinates 
+    //change the updataArea function in 'draw.update'
 
 app.listen(PORT, () => console.log(chalk.bold.rgb(10,100,200)`smooth sounds of port ${PORT}🗺`))
 
