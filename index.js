@@ -5,6 +5,7 @@ const geocodingClient = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN })
 const layouts =require('express-ejs-layouts')
 const chalk = require('chalk')
 const { parse } = require('dotenv')
+let db = require('./models')
 
 //CONFIG APP
 const app = express()
