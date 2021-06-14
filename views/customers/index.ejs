@@ -1,29 +1,18 @@
-<!-- <ul>
-    < % dinoData.forEach( (dino, index) => { %>
-      <li>
-        < %= dino.name %> is a < %= dino.type %>
-        <a href="/dinosaurs/edit/< %= index %>">Edit dino</a>
-        <form method="POST" action="/dinosaurs/< %= index %>/?_method=DELETE">
-        <input type="submit" value="Delete">
-        </form>
-      </li>
-    < % }) %>
-  </ul> -->
+<a href="/customers/new">Add a New Customer</a>
+<a href="/"> Back Home</a> 
 
-  <!-- <h1>Authors</h1>
 
-< % authors.forEach(function(author) { %>
-  <div class="well">
-    <h2>
-      <a href="/authors/< %= author.id %>">
-        < %= author.getFullName() %>
-      </a>
-    </h2>
-  </div>
-< % }) %>
+<h3>Customer info: </h3>
+<ul>
+<% customers.forEach(function(customer) { %>
+  <li>
+    <p> <%= customer.firstName %> <%= customer.lastName %> - <%= customer.phone %> 
+      <% customer.locations.forEach(location => { %> <%= location.address %> </p> <% }) %> 
+      <a href="/customers/edit/">Edit customer</a>
+        <!-- <form method="POST" action="/customers/< %= index %>/?_method=DELETE">
+        <input type="submit" value="Delete"> -->
+        <!-- </form> -->
+        </li>
+<% }) %>
+      </ul>
 
-<a href="/authors/new">Sign Up</a>
-
-<hr />
-
-<a href="/">&larr; Back Home</a> -->

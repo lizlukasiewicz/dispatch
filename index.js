@@ -23,10 +23,6 @@ app.get('/', (req, res) => {
     res.render('home.ejs')
 })
 
-
-//GET customer input from home.ejs (req.query.name req.query.phone req.query.address)
-//save it to database
-
 //   GET /SEARCH -- GEOCODE user form data and render a map --(response.body.features[0])maps the center of the city
 app.get('/search', (req, res) => {
     geocodingClient.forwardGeocode({
@@ -57,7 +53,7 @@ app.get('/zone', (req, res) => {
 //PUT (UPDATE) longitude/latitude coordinates 
     //change the updataArea function in 'draw.update'
 
-    // app.use('/customers', require('./controllers/customers'))
+     app.use('/customers', require('./controllers/customers'))
     // app.use('/articles', require('./controllers/articles'))
 
     app.listen(PORT, () => console.log(chalk.bold.rgb(10,100,200)`smooth sounds of port ${PORT}🗺`))

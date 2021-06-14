@@ -20,18 +20,19 @@ async function createCusty() {
     try {
         const [newCusty, custyCreated] = await db.customer.findOrCreate({
             where: {
-                phone: '(555)555-5555',
-                firstName: 'strover',
-                lastName: 'strover'
+                phone: req.query.phone,
+                firstName: req.query.firstName,
+                lastName: req.query.lastName
             }
         })
         const [newLocation, locationCreated] = await db.location.findOrCreate({
             where: {
-                customerId: 2,
-                address: '179 Starr street, Brooklyn NY'
+                customerId: req.params.customerId,
+                address: req.query.address
             }
         })
         await newCusty.addLocation(location)
+        res.render('customers/index', { customers })
         console.log(`${newCusty.firstName} lives at ${newLocation.address}`)
     } catch(err) {
         console.log(err)
@@ -70,44 +71,43 @@ async function newPet() {
  }
 //  printPet()
 
-async function addPet() {
+async function addLocation() {
     try {
         const options = {
             where: {
-                name: 'Cat',
-                species: 'Jetpack cat'
+                address: req.body.address
             },
             default: {
                 description: 'Awesome cat that flies in a jetpack✈️'
             }
         }
         // ARRAY DESTRUCTING - easy way to put array and object into variables
-        const [pet, crmmeneated] = await db.pet.findOrCreate(options)
+        const [location, crmmeneated] = await db.location.findOrCreate(options)
         //find user
-        const user = await db.user.findOne()
+        const customer = await db.customer.findOne()
         //associate the user with the pet
-        await user.addPet(pet)
-        console.log(`user ${user.firstName} now has a pet named ${pet.name}`)
+        await customer.addLocation(location)
+        console.log(`customer ${customer.firstName} lives at ${location.address}`)
     } catch (error) {
         console.log(error)
     }
 }
-// addPet()
+// addLocation()
 
 //INCLUDES/EAGER LOADING - find a user and bring all the pets associated with them
 async function eagerLoading() {
     try {
-        const users = await db.user.findAll({
-            include: [db.pet]
+        const customers = await db.customer.findAll({
+            include: [db.location]
         })
-        users.forEach(user => {
-            console.log(`${user.firstName}'s pets:`)
-            user.pets.forEach(pet => {
-                console.log(pet.name)
+        customers.forEach(customer => {
+            console.log(`${customer.firstName}'s locations:`)
+            customer.locations.forEach(location => {
+                console.log(location.address)
             })
         })
     } catch (error) {
         console.log(error)
     }
 }
-// eagerLoading()
+ //eagerLoading()
