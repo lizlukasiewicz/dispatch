@@ -7,7 +7,9 @@
 <% customers.forEach(function(customer) { %>
   <li>
     <p> <%= customer.firstName %> <%= customer.lastName %> - <%= customer.phone %> 
-      <% customer.locations.forEach(location => { %> <%= location.address %> </p> <% }) %> 
+      <% customer.locations.forEach(location => { %> 
+        <%= location.address %> </p> 
+        <% }) %> 
       <a href="/customers/edit/">Edit customer</a>
         <!-- <form method="POST" action="/customers/< %= index %>/?_method=DELETE">
         <input type="submit" value="Delete"> -->

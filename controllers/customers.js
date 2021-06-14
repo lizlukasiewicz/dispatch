@@ -41,20 +41,20 @@ router.get('/', async(req, res) => {
 //POST new customer new.ejs  (req.query.name req.query.phone req.query.address)
 router.post('/new', async(req, res) => {
     try {
-        const [newCusty, custyCreated] = await db.customer.findOrCreate({
+        const newCusty = await db.customer.create({
             where: {
-                phone: req.query.phone,
-                firstName: req.query.firstName,
-                lastName: req.query.lastName
+                phone: req.body.phone,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName
             }
         })
-        const [newLocation, locationCreated] = await db.location.findOrCreate({
+        const newLocation = await db.location.create({
             where: {
-                customerId: req.params.customerId,
-                address: req.query.address
+                //customerId: req.params.customerId,
+                address: req.body.address
             }
         })
-        await newCusty.addLocation(location)
+        await newCusty.addLocation(newLocation)
         res.redirect('customers/index')
         console.log(`${newCusty.firstName} lives at ${newLocation.address}`)
     } catch(err) {
@@ -66,5 +66,9 @@ router.post('/new', async(req, res) => {
 router.get('/new', (req, res) => {
     res.render('customers/new.ejs')
 })
+
+//GET /edit/:id -- READ (show) for to edit one customer -- to display form
+
+//PUT /edit/:id -- UPDATE (edit) one customer -- redirect to customers/index
 
 module.exports = router
