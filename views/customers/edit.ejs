@@ -1,13 +1,20 @@
-<form method="POST" action="/customers/<%= customerId %>/?_method=PUT">
+<h1> <%= customer.firstName %> </h1>
+
+<form method="POST" action="/customers/edit/<%= customer.id %>?_method=PUT">
     <label>Phone:</label>
     <input type="text" value="<%= customer.phone %>" name="phone" />
     <label>First Name:</label>
     <input type="text" value="<%= customer.firstName %>" name="firstName" />
     <label>Last Name:</label>
     <input type="text" value="<%= customer.lastName %>" name="lastName" />
-    <% customer.locations.forEach(location => { %>
     <label>Address:</label>
+    <% locations.forEach(location => { %>
     <input type="text" value="<%= location.address %>" name="address" />
-  <% }) %>
     <input type="submit" />
+    <% }) %>
+  </form>
+  <form method="POST" action="/customers/edit/<%=customer.id%>/add">
+  <label for="address">Add another Address:</label>
+  <input name="newAddress" type="text" />
+  <input type="submit" />
   </form>

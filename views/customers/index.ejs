@@ -6,14 +6,14 @@
 <ul>
 <% customers.forEach(function(customer) { %>
   <li>
-    <p> <%= customer.firstName %> <%= customer.lastName %> - <%= customer.phone %> 
+    <p> <%= customer.firstName %> <%= customer.lastName %> -<strong> <%= customer.phone %> </strong>
       <% customer.locations.forEach(location => { %> 
         <%= location.address %> </p> 
         <% }) %> 
-      <a href="/customers/edit/">Edit customer</a>
-        <!-- <form method="POST" action="/customers/< %= index %>/?_method=DELETE">
-        <input type="submit" value="Delete"> -->
-        <!-- </form> -->
+      <a href="/customers/edit/<%= customer.id %>">Edit customer</a>
+        <form method="POST" action="/customers/?_method=DELETE">
+        <input type="submit" value="Delete">
+        </form>
         </li>
 <% }) %>
       </ul>

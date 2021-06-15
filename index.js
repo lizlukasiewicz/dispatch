@@ -6,15 +6,19 @@ const layouts =require('express-ejs-layouts')
 const chalk = require('chalk')
 const { parse } = require('dotenv')
 let db = require('./models')
+const { urlencoded } = require('express')
+const methodOverride = require('method-override')
 
 //CONFIG APP
 const app = express()
 const PORT = process.env.PORT || 5000
 app.set('view engine', 'ejs')
+app.use(methodOverride('_method'))
 
 //MIDDLEWARES
 app.use(layouts)
 app.use(express.static(__dirname + `/public`))
+app.use(express.urlencoded({ extended:false }))
 
 //  ROUTES
 
