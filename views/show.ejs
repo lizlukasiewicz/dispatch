@@ -10,7 +10,10 @@
 <input type="submit" />
 </form>
 </div>
-
+<h4>customers:</h4>
+<!-- <p> < %= customer.phone %> < %= location.address %> </p> -->
+<br>
+<br>
 <div id="map"></div>
 
 
@@ -74,23 +77,15 @@ map.on('click', function (e) {
 //run function spread operator - (new way to do push function) -- to check if entire length of array(add new position)loop through array-- look into:caching array values - adding data to second object- before loop check if value is already in array
 // function push first/check points with loop 
 
-// class Zone {
-//     constructor()
-// }
-// const zone = {
-//     type: geojson,
-//     data: {
-//         type: Feature,
-//         geometry: {
-//             type: Polygon,
-//             coordinates: [[[]]]
-//             }
-//         }
-//     }
-// function setCoordinates(e) {
-//     var coordinates = e.lngLat
-// }
 // const newZone = document.getElementById("newZone")
 
 
  </script>
+ <!-- <h2>zone info:</h2>
+<ul>
+    < % headers.forEach(function(lnglat) { %>
+<li>
+    <p> < %=lnglat %></p>
+</li>
+    < % }) %>
+</ul> -->

@@ -8,6 +8,7 @@ const { parse } = require('dotenv')
 let db = require('./models')
 const { urlencoded } = require('express')
 const methodOverride = require('method-override')
+let router = express.Router()
 
 //CONFIG APP
 const app = express()
@@ -47,13 +48,6 @@ app.get('/zone', (req, res) => {
     console.log(lnglat)
     res.json({message: 'hello from the route'})
 })
-// app.post('/zone', (req, res) => {
-    
-// })
-// app.get('show.ejs', (req, res) => {
-// })
-    //get zone name
-    //store zone data in model table
 
 //POST - zone data with input name 
 
@@ -61,10 +55,17 @@ app.get('/zone', (req, res) => {
     //change the updataArea function in 'draw.update'
 
 //GET customer from search
-app.get('/search', (req, res) => {
-    
-    db.get()
-
+router.get('/search', async (req, res) => {
+    try {
+        const customer = await db.customer.findOne({
+            where: { phone: req.query.search },
+            include: [db.location]
+        })
+        console.log(customer)
+        //res.render('show.ejs', { customer })
+    } catch (error) {
+        console.log(error)
+    }
 })
 //POST customer address
 

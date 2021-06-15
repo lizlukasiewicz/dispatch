@@ -6,7 +6,7 @@
 <ul>
 <% customers.forEach(function(customer) { %>
   <li>
-    <p> <%= customer.firstName %> <%= customer.lastName %> -<strong> <%= customer.phone %> </strong>
+    <p><strong> <%= customer.firstName %> <%= customer.lastName %> - <%= customer.phone %> </strong>
       <% customer.locations.forEach(location => { %> 
         <%= location.address %> </p> 
         <% }) %> 
