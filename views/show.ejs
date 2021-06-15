@@ -1,17 +1,19 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.js"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.css" type="text/css">
-
+<a href="/"> Home Screen</a> 
 <h4>Select your Zones::</h4>
 <pre id="info"></pre>
 <div>
     <h4>find customer to selected zone::</h4>
-<form method="GET" action="/search">
-<input type="text" name ="search" placeholder="phone #"/>
+<form method="GET" action="/address">
+<input type="text" name ="address" placeholder="phone #"/>
 <input type="submit" />
 </form>
 </div>
 <h4>customers:</h4>
-<!-- <p> < %= customer.phone %> < %= location.address %> </p> -->
+<% if(customer) { %>
+<p> <%= customer.phone %> <%= customer.locations[0].address %> </p>
+<% } %>
 <br>
 <br>
 <div id="map"></div>
@@ -51,7 +53,8 @@ map.on('draw.update', updateArea);
 function updateArea(e) {
     const headers = new Headers({
   'Content-Type': 'application/json',
-  'lngLat': e.features[0].geometry.coordinates[0]
+  'lngLat': e.features[0].geometry.coordinates[0],
+  'id': e.features[0].id
 })
         fetch('/zone', {
             method: 'GET',
@@ -61,15 +64,35 @@ function updateArea(e) {
         .catch(err => console.log(err))
    console.log(e) //the click event
    console.log(e.features[0].geometry.coordinates[0])
+   console.log(e.features[0].id)
 }
+//taking geocoded customer address and putting a marker on the map for it 
+// const geojson = {
+//     type: 'featureCollection',
+//     features: [{
+//         type: 'Feature',
+//         geometry: {
+//             type: 'Point',
+//             coordinates: //[store the geocoded lng lat in 2 seperate variables]
+//         },
+//         properties: {
+//             title: 'Mapbox',
+//             description: 'Mapbox Element'
+//         }
+//     }]
+// }
+// geojson.features.forEach(marker => {
+//     const el = document.createElement('img')
+//     el.class = 'marker'
+//     el.src = 'images/mapbox-marker.png'
+//     el.style.width = '3vw'
+//     new mapboxgl.Marker(el)
+//     .setLngLat(marker.geometry.coordinates)
+//     .addTo(map)
+// })
 
 map.on('click', function (e) {
     document.getElementById('info').innerHTML =
-// e.point is the x, y coordinates of the mousemove event relative
-// to the top-left corner of the map
-    // JSON.stringify(e.point) +
-    // '<br />' +
-// e.lngLat is the longitude, latitude geographical position of the event
     JSON.stringify(e.lngLat.wrap())
 });
 

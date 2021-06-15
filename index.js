@@ -8,7 +8,7 @@ const { parse } = require('dotenv')
 let db = require('./models')
 const { urlencoded } = require('express')
 const methodOverride = require('method-override')
-let router = express.Router()
+// let router = express.Router()
 
 //CONFIG APP
 const app = express()
@@ -38,14 +38,17 @@ app.get('/search', (req, res) => {
         //console.log(response.body.features[0])
         res.render('show.ejs', {
             match: response.body.features[0],
-            mapkey: process.env.MAPBOX_TOKEN
+            mapkey: process.env.MAPBOX_TOKEN,
+            customer: undefined
         })
     })
 })
 //GET polygon lat/lon coordinates array, and id #
 app.get('/zone', (req, res) => {
     const lnglat = req.headers.lnglat.split(",").map(num => parseFloat(num))
+    const id = req.headers.id
     console.log(lnglat)
+    console.log(id)
     res.json({message: 'hello from the route'})
 })
 
@@ -55,19 +58,27 @@ app.get('/zone', (req, res) => {
     //change the updataArea function in 'draw.update'
 
 //GET customer from search
-router.get('/search', async (req, res) => {
+app.get('/address', async (req, res) => {
     try {
         const customer = await db.customer.findOne({
-            where: { phone: req.query.search },
+            where: { phone: req.query.address },
             include: [db.location]
         })
-        console.log(customer)
-        //res.render('show.ejs', { customer })
+        const response = await geocodingClient.forwardGeocode({
+            query: `${customer.get().locations[0].get().address}`
+        })
+        .send()
+        console.log(customer.locations[0].address)
+        res.render('show.ejs', { customer: customer.get(), mapkey: process.env.MAPBOX_TOKEN })
     } catch (error) {
         console.log(error)
     }
 })
-//POST customer address
+//1. grab the customer //DONE"center":[-73.98113,40.687204],"geometry":{"type":"Point","coordinates":[-73.98113,40.687204]}
+// 2. grab the address //DONE "center":[-73.97589,40.74468]"center":[-73.97589,40.74468]
+// 3. geocode address to coordinates
+// 4. pass coordinates as variable to res.render
+// 5. add coordinates to the map on the frontend
 
 app.use('/customers', require('./controllers/customers'))
     
