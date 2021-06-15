@@ -97,5 +97,16 @@ router.post('/edit/:id/add', (req, res) => {
         console.log(error)
     })
 })
-//db.whatever.delete
+
+//DELETE CUSTOMER
+router.delete('/edit/:id', (req, res) => {
+  db.customer.destroy({
+    where: { name: req.body.delete }
+  })
+  .then(numRowsDeleted=>{
+      console.log(numRowsDeleted)
+    // do something when done deleting
+      res.redirect('/customers')
+  });
+} )
 module.exports = router
