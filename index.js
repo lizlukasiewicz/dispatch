@@ -47,6 +47,9 @@ app.get('/zone', (req, res) => {
     console.log(lnglat)
     res.json({message: 'hello from the route'})
 })
+// app.post('/zone', (req, res) => {
+    
+// })
 // app.get('show.ejs', (req, res) => {
 // })
     //get zone name
@@ -57,10 +60,17 @@ app.get('/zone', (req, res) => {
 //PUT (UPDATE) longitude/latitude coordinates 
     //change the updataArea function in 'draw.update'
 
-     app.use('/customers', require('./controllers/customers'))
+//GET customer from search
+app.get('/search', (req, res) => {
     
+    db.get()
 
-    app.listen(PORT, () => console.log(chalk.bold.rgb(10,100,200)`smooth sounds of port ${PORT}🗺`))
+})
+//POST customer address
+
+app.use('/customers', require('./controllers/customers'))
+    
+app.listen(PORT, () => console.log(chalk.bold.rgb(10,100,200)`smooth sounds of port ${PORT}🗺`))
 
 // console.log(chalk`{bold.rgb(10,100,200) Hello!}`)
 // console.log(chalk.bold.rgb(10, 100, 200)('Hello!'));
