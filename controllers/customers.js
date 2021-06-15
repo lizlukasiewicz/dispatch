@@ -66,20 +66,29 @@ db.customer.findOne({
 
 //POST /edit/:id -- UPDATE (edit) one customer -- redirect to customers/index
 router.put('/edit/:id', (req, res) => {
-    //console.log(req.body.address)
+    console.log(req.body.address, '💅')
     db.customer.update({
         phone: req.body.phone,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
     }, {where: { id: req.params.id }})
     .then(changedCustomer => {
-        console.log(changedCustomer)
-        db.location.update({
-            address: req.body.address
-        }, {where: { customerId: req.params.id }}).then(newAddress => {
-            console.log(newAddress)
-            res.redirect('/customers')
+        db.customer.findOne({
+            where: {
+                id: req.params.id
+            }, include: [db.location]
         })
+        .then(foundCustomer => {
+            const locations = foundCustomer.locations.map((location, index) => {
+                return db.location.update({
+                    address: req.body.address[index]
+                }, {where: { id: location.id, }})
+            })
+            Promise.all(locations)
+            .then(() => {
+                res.redirect('/customers')
+            })
+        } )
     })
     .catch(error => {
         console.log(error)
@@ -99,9 +108,9 @@ router.post('/edit/:id/add', (req, res) => {
 })
 
 //DELETE CUSTOMER
-router.delete('/edit/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   db.customer.destroy({
-    where: { name: req.body.delete }
+    where: { id: req.params.id }
   })
   .then(numRowsDeleted=>{
       console.log(numRowsDeleted)

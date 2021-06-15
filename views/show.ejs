@@ -35,7 +35,7 @@
 	// 	      .setHTML('you clicked here: <br/>' + coordinates)
 	// 	      .addTo(map);
 	// 	  });
-          
+//POLYGON DRAWWS
 var draw = new MapboxDraw({
     displayControlsDefault: false,
     controls: {
@@ -67,30 +67,32 @@ function updateArea(e) {
    console.log(e.features[0].id)
 }
 //taking geocoded customer address and putting a marker on the map for it 
-// const geojson = {
-//     type: 'featureCollection',
-//     features: [{
-//         type: 'Feature',
-//         geometry: {
-//             type: 'Point',
-//             coordinates: //[store the geocoded lng lat in 2 seperate variables]
-//         },
-//         properties: {
-//             title: 'Mapbox',
-//             description: 'Mapbox Element'
-//         }
-//     }]
-// }
-// geojson.features.forEach(marker => {
-//     const el = document.createElement('img')
-//     el.class = 'marker'
-//     el.src = 'images/mapbox-marker.png'
-//     el.style.width = '3vw'
-//     new mapboxgl.Marker(el)
-//     .setLngLat(marker.geometry.coordinates)
-//     .addTo(map)
-// })
 
+//if(coordinates) {
+        const geojson = {
+            type: 'featureCollection',
+            features: [{
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: ['<%= coordinates[0]%>', '<%= coordinates[1]%>']
+                },
+                properties: {
+                    title: 'Mapbox',
+                    description: 'Mapbox Element'
+                }
+            }]
+        }
+        geojson.features.forEach(marker => {
+            const el = document.createElement('img')
+            el.class = 'marker'
+            el.src = 'images/mapbox-marker.png'
+            el.style.width = '3vw'
+            new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .addTo(map)
+        })
+//}
 map.on('click', function (e) {
     document.getElementById('info').innerHTML =
     JSON.stringify(e.lngLat.wrap())

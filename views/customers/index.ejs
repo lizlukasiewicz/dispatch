@@ -11,7 +11,7 @@
         <%= location.address %> </p> 
         <% }) %> 
       <a href="/customers/edit/<%= customer.id %>">Edit customer</a>
-        <form method="POST" action="/customers/?_method=DELETE">
+        <form method="POST" action="/customers/<%= customer.id%>?_method=DELETE">
         <input type="submit" value="Delete">
         </form>
         </li>

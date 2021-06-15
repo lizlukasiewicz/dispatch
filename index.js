@@ -39,7 +39,8 @@ app.get('/search', (req, res) => {
         res.render('show.ejs', {
             match: response.body.features[0],
             mapkey: process.env.MAPBOX_TOKEN,
-            customer: undefined
+            customer: undefined,
+            coordinates: [null, null]
         })
     })
 })
@@ -66,10 +67,9 @@ app.get('/address', async (req, res) => {
         })
         const response = await geocodingClient.forwardGeocode({
             query: `${customer.get().locations[0].get().address}`
-        })
-        .send()
-        console.log(customer.locations[0].address)
-        res.render('show.ejs', { customer: customer.get(), mapkey: process.env.MAPBOX_TOKEN })
+        }).send()
+        const coordinates = response.body.features[0].center
+        res.render('show.ejs', { customer: customer.get(), mapkey: process.env.MAPBOX_TOKEN, coordinates })
     } catch (error) {
         console.log(error)
     }
