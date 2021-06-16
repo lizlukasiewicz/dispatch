@@ -87,7 +87,7 @@ function updateArea(e) {
             const el = document.createElement('img')
             el.class = 'marker'
             el.src = 'images/mapbox-marker.png'
-            el.style.width = '3vw'
+            el.style.width = '1vw'
             new mapboxgl.Marker(el)
             .setLngLat(marker.geometry.coordinates)
             .addTo(map)

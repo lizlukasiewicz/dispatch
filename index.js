@@ -76,9 +76,9 @@ app.get('/address', async (req, res) => {
 })
 //1. grab the customer //DONE"center":[-73.98113,40.687204],"geometry":{"type":"Point","coordinates":[-73.98113,40.687204]}
 // 2. grab the address //DONE "center":[-73.97589,40.74468]"center":[-73.97589,40.74468]
-// 3. geocode address to coordinates
-// 4. pass coordinates as variable to res.render
-// 5. add coordinates to the map on the frontend
+// 3. geocode address to coordinates DONE
+// 4. pass coordinates as variable to res.render DONNNEEE
+// 5. add coordinates to the map on the frontend FINITOOOOOO
 
 app.use('/customers', require('./controllers/customers'))
     

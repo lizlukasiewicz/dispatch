@@ -1,6 +1,53 @@
 * {
-    background-color: teal;
+    background-color:darkslategrey;
+    /* background-image: url("/images/spaceman.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover; */
 }
+/* h1 {
+    background-image: unset;
+    display: flex;
+    justify-content: center;
+    background-color:rgba(248, 248, 232, 0.205) ;
+}
+h2 {
+    background-image: unset;
+    background-color:rgba(244, 248, 232, 0.205) ;
+}
+h3 {
+    background-image: unset;
+    display: flex;
+    justify-content: center;
+    background-color:rgba(244, 248, 232, 0.205) ;
+}
+p, strong {
+    background-image: unset;
+}
+h4 {
+    background-image: unset;
+    display: flex;
+    justify-content: center;
+    background-color:rgba(244, 248, 232, 0.205) ;
+}
+a {
+    background-image: unset;
+    display: flex;
+    justify-content: center;
+    background-color:rgba(244, 248, 232, 0.205) ;
+}
+div {
+    background-image: unset;
+    background-color:rgba(244, 248, 232, 0.205) ;
+}
+form, input {
+    background-image: unset;
+    display: flex;
+    justify-content: center;
+    background-color:rgba(244, 248, 232, 0.205) ;
+}
+ul, li {
+    background-image: unset;
+    background-color:rgba(244, 248, 232, 0.205) ; */
 
 #map {
     position: absolute;
@@ -22,4 +69,9 @@
     text-align: center;
     color: #222;
     background: #fff;
+    }
+#navItems {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
     }
