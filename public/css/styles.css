@@ -1,32 +1,54 @@
 * {
     background-color:darkslategrey;
-    /* background-image: url("/images/spaceman.jpeg");
+    background-image: url("/images/spaceman.jpeg");
     background-repeat: no-repeat;
-    background-size: cover; */
+    background-size: cover;
 }
 h1 {
     background-image: unset;
     display: flex;
     justify-content: center;
-    background-color:rgba(248, 248, 232, 0.205) ;
+    background-color:rgba(248, 248, 232, 0.205);
+    padding-top: -1px;
+    padding-bottom: -1px;
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+#subheading {
+    font-size: 13pt;
+    padding-top: 0px;
+    margin-bottom: 80px;
 }
 h2 {
     background-image: unset;
+    background-color: rgba(245, 245, 220, 0.007);
 ;
 }
 h3 {
     background-image: unset;
+    background-color: rgba(245, 245, 220, 0.007);
+    padding-top: -1px;
+    padding-bottom: -1px;
+    margin-top: -1px;
+    margin-bottom: -1px;
 }
 p, strong {
     background-image: unset;
+    background-color: rgba(245, 245, 220, 0.007);
 }
 h4 {
     background-image: unset;
     display: flex;
     justify-content: center;
+    background-color: rgba(245, 245, 220, 0.007);
+    padding-top: -1px;
+    padding-bottom: -1px;
+    margin-top: -1px;
+    margin-bottom: -1px;
 }
 a {
     background-image: unset;
+    background-color: rgba(245, 245, 220, 0.007);
     
 }
 div {
@@ -34,17 +56,19 @@ div {
 }
 form, input {
     background-image: unset;
+    background-color: rgba(245, 245, 220, 0.007);
 }
 ul, li {
     background-image: unset;
+    background-color: rgba(245, 245, 220, 0.007);
 }
 #map {
     position: absolute;
     /* bottom: 0;
     top: 35%;
     left: 50%; */
-    width: 60%;
-    height: 60%;
+    width: 50%;
+    height: 75%;
 }
 
 #info {
@@ -63,4 +87,9 @@ ul, li {
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
+    background-color: rgba(245, 245, 220, 0.007);
     }
+#background {
+    background-image: unset;
+    background-color: rgba(245, 245, 220, 0.397);
+}

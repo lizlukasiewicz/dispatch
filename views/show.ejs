@@ -1,18 +1,19 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.js"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.css" type="text/css">
 <div id="background">
+<div id="navItems">
 <a href="/"> Home Screen</a> 
 <a href="/customers">Existing Customers</a>
+</div>
 <h4>Select your Zones::</h4>
 <pre id="info"></pre>
-<div>
-    <h4>find customer to selected zone::</h4>
+    <h3>find customer to selected zone::</h3>
 <form method="GET" action="/address">
 <input type="text" name ="address" placeholder="phone #"/>
 <input type="submit" />
 </form>
-</div>
-<h4>customers:</h4>
+
+<h3>customers:</h3>
 <% if(customer) { %>
 <p> <%= customer.phone %> <%= customer.locations[0].address %> </p>
 <% } %>
@@ -28,7 +29,7 @@
          container: 'map',
          style: 'mapbox://styles/mapbox/streets-v11',
          center: [-73.93126065039185, 40.74089181704446],
-         zoom: 10
+         zoom: 11
      })
     //  map.on('click', function(e) {
 	// 	    var coordinates = e.lngLat;
