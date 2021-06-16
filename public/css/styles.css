@@ -6,19 +6,16 @@
 }
 h1 {
     background-image: unset;
-    color: whitesmoke;
     display: flex;
     justify-content: center;
     background-color:rgba(248, 248, 232, 0.205) ;
 }
 h2 {
     background-image: unset;
-    color: whitesmoke;
 ;
 }
 h3 {
     background-image: unset;
-    color: powderblue;
 }
 p, strong {
     background-image: unset;
@@ -30,8 +27,6 @@ h4 {
 }
 a {
     background-image: unset;
-    display: flex;
-    justify-content: center;
     
 }
 div {
@@ -68,5 +63,4 @@ ul, li {
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
-    color: thistle;
     }
