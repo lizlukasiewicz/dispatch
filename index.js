@@ -27,6 +27,9 @@ app.use(express.urlencoded({ extended:false }))
 app.get('/', (req, res) => {
     res.render('home.ejs')
 })
+app.get('/mapzone', (req, res) => {
+    res.render('mapzone.ejs')
+})
 
 //   GET /SEARCH -- GEOCODE user form data and render a map --(response.body.features[0])maps the center of the city
 app.get('/search', (req, res) => {
@@ -47,11 +50,16 @@ app.get('/search', (req, res) => {
 //GET polygon lat/lon coordinates array, and id #
 app.get('/zone', (req, res) => {
     const lnglat = req.headers.lnglat.split(",").map(num => parseFloat(num))
+    //res.render('mapzone.ejs', { lnglat: lnglat })
     const id = req.headers.id
+    //res.render('mapzone.ejs', { id: id })
+    //const layers = req.headers.layers
     console.log(lnglat)
     console.log(id)
-    res.json({message: 'hello from the route'})
+    //console.log(layers)
+    //res.json({message: 'hello from the route'})
 })
+
 
 //POST - zone data with input name 
 

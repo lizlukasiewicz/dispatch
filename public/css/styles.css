@@ -93,3 +93,8 @@ ul, li {
     background-image: unset;
     background-color: rgba(245, 245, 220, 0.397);
 }
+#zones {
+    background-image: unset;
+    background-color: rgba(245, 245, 220, 0.397);
+    padding: 20px;
+}

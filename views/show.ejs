@@ -5,8 +5,10 @@
 <a href="/"> Home Screen</a> 
 <a href="/customers">Existing Customers</a>
 </div>
-<h4>Select your Zones::</h4>
-<pre id="info"></pre>
+<h4>Select your Zones::</h4><a href="/mapzone">zones</a>
+<pre id="info">
+<p>{}</p>
+</pre>
     <h3>find customer to selected zone::</h3>
 <form method="GET" action="/address">
 <input type="text" name ="address" placeholder="phone #"/>
@@ -47,6 +49,12 @@ var draw = new MapboxDraw({
         trash: true
     },
     defaultMode: 'draw_polygon'
+    // layers: [ {
+    //     id: 'zone',
+    //     source: 'color',
+    //     type: 'fill',
+    //     paint: { fill_color: '#7fff00' },
+    // }]
 });
 map.addControl(draw);
  
@@ -58,20 +66,20 @@ function updateArea(e) {
     const headers = new Headers({
   'Content-Type': 'application/json',
   'lngLat': e.features[0].geometry.coordinates[0],
-  'id': e.features[0].id
+  'id': e.features[0].id,
 })
         fetch('/zone', {
             method: 'GET',
             headers: headers,
         }).then(response => response.json())
-        .then(data => console.log(data))
+        .then(e => {document.getElementById('info').innerHTML = e.features[0].id.wrap()})
         .catch(err => console.log(err))
    console.log(e) //the click event
    console.log(e.features[0].geometry.coordinates[0])
    console.log(e.features[0].id)
 }
-//taking geocoded customer address and putting a marker on the map for it 
 
+//taking geocoded customer address and putting a marker on the map for it 
 //if(coordinates) {
         const geojson = {
             type: 'featureCollection',
@@ -97,10 +105,10 @@ function updateArea(e) {
             .addTo(map)
         })
 //}
-map.on('click', function (e) {
-    document.getElementById('info').innerHTML =
-    JSON.stringify(e.lngLat.wrap())
-});
+// map.on('click', function (e) {
+//     document.getElementById('info').innerHTML =
+//     JSON.stringify(e.lngLat.wrap())
+// });
 
 //for each 'click, push.coordinates --> to array.push[]  
 //run function spread operator - (new way to do push function) -- to check if entire length of array(add new position)loop through array-- look into:caching array values - adding data to second object- before loop check if value is already in array
