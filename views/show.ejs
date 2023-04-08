@@ -33,14 +33,7 @@
          center: [-73.93126065039185, 40.74089181704446],
          zoom: 11
      })
-    //  map.on('click', function(e) {
-	// 	    var coordinates = e.lngLat;
 
-	// 	    new mapboxgl.Popup()
-	// 	      .setLngLat(coordinates)
-	// 	      .setHTML('you clicked here: <br/>' + coordinates)
-	// 	      .addTo(map);
-	// 	  });
 //POLYGON DRAWWS
 var draw = new MapboxDraw({
     displayControlsDefault: false,
@@ -64,11 +57,11 @@ map.on('draw.update', updateArea);
 
 function updateArea(e) {
     const headers = new Headers({
-  'Content-Type': 'application/json',
-  'lngLat': e.features[0].geometry.coordinates[0],
-  'id': e.features[0].id,
-})
-        fetch('/zone', {
+          'Content-Type': 'application/json',
+          'lngLat': e.features[0].geometry.coordinates[0],
+          'id': e.features[0].id,
+        })
+    fetch('/zone', {
             method: 'GET',
             headers: headers,
         }).then(response => response.json())
